@@ -123,6 +123,10 @@ def main(high_score):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+                fo = open("Assets/hs.txt", "w")
+                s = str(high_score[0])
+                fo.write(s)
+                fo.close()
                 pygame.quit()
 
             if event.type == BORDER_HIT:
@@ -146,5 +150,11 @@ def main(high_score):
     main(high_score)
 
 if __name__ == "__main__":
-    high_score = [0]
+    fo = open("Assets/hs.txt", "r")
+    high_score = []
+    try:
+        high_score.append(int(fo.read()))
+    except:
+        high_score.append(0)
+    fo.close()
     main(high_score)
